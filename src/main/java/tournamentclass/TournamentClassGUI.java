@@ -76,6 +76,11 @@ public class TournamentClassGUI extends javax.swing.JFrame {
         jMenu1.setText("Classes");
 
         miAdd.setText("Add Class");
+        miAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAddActionPerformed(evt);
+            }
+        });
         jMenu1.add(miAdd);
 
         miRemove.setText("Remove Class(es)");
@@ -87,6 +92,10 @@ public class TournamentClassGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void miAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miAddActionPerformed
 
     /**
      * @param args the command line arguments
