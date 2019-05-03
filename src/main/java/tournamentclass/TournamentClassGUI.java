@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package tournamentclass;
 
 /**
  *
@@ -27,18 +27,63 @@ public class TournamentClassGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelCenter = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        liClasses = new javax.swing.JList<>();
+        panelSouth = new javax.swing.JPanel();
+        lbClassCount = new javax.swing.JLabel();
+        tfClassCount = new javax.swing.JTextField();
+        lbSpacer = new javax.swing.JLabel();
+        lbUnusedClassCount = new javax.swing.JLabel();
+        tfUnusedClassCount = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        miAdd = new javax.swing.JMenuItem();
+        miRemove = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        panelCenter.setLayout(new java.awt.GridLayout(1, 1));
+
+        liClasses.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(liClasses);
+
+        panelCenter.add(jScrollPane1);
+
+        getContentPane().add(panelCenter, java.awt.BorderLayout.CENTER);
+
+        panelSouth.setLayout(new java.awt.GridLayout(1, 5));
+
+        lbClassCount.setText("Classes:");
+        panelSouth.add(lbClassCount);
+
+        tfClassCount.setEditable(false);
+        panelSouth.add(tfClassCount);
+        panelSouth.add(lbSpacer);
+
+        lbUnusedClassCount.setText("Unused Classes");
+        panelSouth.add(lbUnusedClassCount);
+
+        tfUnusedClassCount.setEditable(false);
+        panelSouth.add(tfUnusedClassCount);
+
+        getContentPane().add(panelSouth, java.awt.BorderLayout.SOUTH);
+
+        jMenu1.setText("Classes");
+
+        miAdd.setText("Add Class");
+        jMenu1.add(miAdd);
+
+        miRemove.setText("Remove Class(es)");
+        jMenu1.add(miRemove);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -79,5 +124,18 @@ public class TournamentClassGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbClassCount;
+    private javax.swing.JLabel lbSpacer;
+    private javax.swing.JLabel lbUnusedClassCount;
+    private javax.swing.JList<String> liClasses;
+    private javax.swing.JMenuItem miAdd;
+    private javax.swing.JMenuItem miRemove;
+    private javax.swing.JPanel panelCenter;
+    private javax.swing.JPanel panelSouth;
+    private javax.swing.JTextField tfClassCount;
+    private javax.swing.JTextField tfUnusedClassCount;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,5 @@
 
-package bl;
+package tournament;
 
 /**
  *
