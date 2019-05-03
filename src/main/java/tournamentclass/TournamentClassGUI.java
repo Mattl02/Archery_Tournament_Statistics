@@ -5,17 +5,30 @@
  */
 package tournamentclass;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Matthias
  */
 public class TournamentClassGUI extends javax.swing.JFrame {
 
+    private TournamentClassListModel model = new TournamentClassListModel();
+    
     /**
      * Creates new form TournamentClassGUI
      */
     public TournamentClassGUI() {
         initComponents();
+        
+        liClasses.setModel(model);
+        
+        this.updateCounts();
+    }
+    
+    public void updateCounts(){
+        tfClassCount.setText(model.getSize()+"");
+        tfUnusedClassCount.setText(model.getSize()+"");
     }
 
     /**
@@ -94,7 +107,11 @@ public class TournamentClassGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddActionPerformed
-        // TODO add your handling code here:
+        String name = JOptionPane.showInputDialog(this, "Enter a name for the class.");
+        if(name != null){
+            model.add(new TournamentClass(name));
+            updateCounts();
+        }
     }//GEN-LAST:event_miAddActionPerformed
 
     /**

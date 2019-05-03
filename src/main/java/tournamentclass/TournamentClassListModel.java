@@ -8,7 +8,7 @@ import javax.swing.AbstractListModel;
  *
  * @author Matthias
  */
-public class TournamentClassListModel extends AbstractListModel<TournamentClass>{
+public class TournamentClassListModel extends AbstractListModel{
 
     private ArrayList<TournamentClass> classes = new ArrayList<>();
     
