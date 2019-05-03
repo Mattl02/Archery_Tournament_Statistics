@@ -97,6 +97,11 @@ public class TournamentClassGUI extends javax.swing.JFrame {
         jMenu1.add(miAdd);
 
         miRemove.setText("Remove Class(es)");
+        miRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRemoveActionPerformed(evt);
+            }
+        });
         jMenu1.add(miRemove);
 
         jMenuBar1.add(jMenu1);
@@ -113,6 +118,17 @@ public class TournamentClassGUI extends javax.swing.JFrame {
             updateCounts();
         }
     }//GEN-LAST:event_miAddActionPerformed
+
+    private void miRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveActionPerformed
+        if(liClasses.getSelectedIndices().length > 0){
+            if(liClasses.getSelectedIndices().length > 1){
+                model.remove(liClasses.getSelectedIndices());
+            }
+            else {
+                model.remove(liClasses.getSelectedIndex());
+            }
+        }
+    }//GEN-LAST:event_miRemoveActionPerformed
 
     /**
      * @param args the command line arguments
