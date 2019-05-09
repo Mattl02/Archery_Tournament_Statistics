@@ -19,6 +19,9 @@ public class TournamentGUI extends javax.swing.JFrame {
      */
     public TournamentGUI() {
         initComponents();
+        
+        listTournaments.setComponentPopupMenu(jPopupMenu1);
+        listParticipants.setComponentPopupMenu(jPopupMenu2);
     }
 
     /**
@@ -30,6 +33,12 @@ public class TournamentGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        miAddTournament = new javax.swing.JMenuItem();
+        miRemoveTournament = new javax.swing.JMenuItem();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        miAddParticipant = new javax.swing.JMenuItem();
+        miRemoveParticipant = new javax.swing.JMenuItem();
         panelWest = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listTournaments = new javax.swing.JList<>();
@@ -37,6 +46,38 @@ public class TournamentGUI extends javax.swing.JFrame {
         panelEast = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listParticipants = new javax.swing.JList<>();
+
+        miAddTournament.setText("Add Tournament");
+        miAddTournament.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAddTournamentActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(miAddTournament);
+
+        miRemoveTournament.setText("Remove selected");
+        miRemoveTournament.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRemoveTournamentActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(miRemoveTournament);
+
+        miAddParticipant.setText("Add Participant");
+        miAddParticipant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAddParticipantActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(miAddParticipant);
+
+        miRemoveParticipant.setText("Remove Selected");
+        miRemoveParticipant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRemoveParticipantActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(miRemoveParticipant);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(1, 2));
@@ -83,6 +124,22 @@ public class TournamentGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void miAddTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddTournamentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miAddTournamentActionPerformed
+
+    private void miRemoveTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveTournamentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miRemoveTournamentActionPerformed
+
+    private void miAddParticipantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddParticipantActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miAddParticipantActionPerformed
+
+    private void miRemoveParticipantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveParticipantActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miRemoveParticipantActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -119,10 +176,16 @@ public class TournamentGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> listParticipants;
     private javax.swing.JList<String> listTournaments;
+    private javax.swing.JMenuItem miAddParticipant;
+    private javax.swing.JMenuItem miAddTournament;
+    private javax.swing.JMenuItem miRemoveParticipant;
+    private javax.swing.JMenuItem miRemoveTournament;
     private javax.swing.JPanel panelEast;
     private javax.swing.JPanel panelWest;
     private javax.swing.JPanel panelWestSouth;
