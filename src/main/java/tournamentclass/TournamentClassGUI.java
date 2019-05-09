@@ -113,7 +113,7 @@ public class TournamentClassGUI extends javax.swing.JFrame {
 
     private void miAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddActionPerformed
         String name = JOptionPane.showInputDialog(this, "Enter a name for the class.");
-        if(name != null){
+        if(name != null && name.length() > 0){
             model.add(new TournamentClass(name));
             updateCounts();
         }
