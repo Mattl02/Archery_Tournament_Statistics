@@ -11,6 +11,9 @@ package tournament;
  */
 public class TournamentGUI extends javax.swing.JFrame {
 
+    
+    
+    
     /**
      * Creates new form TournamentGUI
      */
@@ -27,18 +30,55 @@ public class TournamentGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        panelWest = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listTournaments = new javax.swing.JList<>();
+        panelWestSouth = new javax.swing.JPanel();
+        panelEast = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listParticipants = new javax.swing.JList<>();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridLayout(1, 2));
+
+        panelWest.setLayout(new java.awt.BorderLayout());
+
+        listTournaments.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(listTournaments);
+
+        panelWest.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout panelWestSouthLayout = new javax.swing.GroupLayout(panelWestSouth);
+        panelWestSouth.setLayout(panelWestSouthLayout);
+        panelWestSouthLayout.setHorizontalGroup(
+            panelWestSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        panelWestSouthLayout.setVerticalGroup(
+            panelWestSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        panelWest.add(panelWestSouth, java.awt.BorderLayout.SOUTH);
+
+        getContentPane().add(panelWest);
+
+        panelEast.setLayout(new java.awt.GridLayout(1, 1));
+
+        listParticipants.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(listParticipants);
+
+        panelEast.add(jScrollPane2);
+
+        getContentPane().add(panelEast);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -79,5 +119,12 @@ public class TournamentGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> listParticipants;
+    private javax.swing.JList<String> listTournaments;
+    private javax.swing.JPanel panelEast;
+    private javax.swing.JPanel panelWest;
+    private javax.swing.JPanel panelWestSouth;
     // End of variables declaration//GEN-END:variables
 }
