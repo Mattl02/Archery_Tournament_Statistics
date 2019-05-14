@@ -21,6 +21,11 @@ public class TournamentListModel extends AbstractListModel{
         this.fireIntervalAdded(this, tournaments.size()-1, tournaments.size()-1);
     }
     
+    public void add (int idx, Tournament t){
+        tournaments.add(idx, t);
+        this.fireIntervalAdded(this, idx, tournaments.size()-1);
+    }
+    
     /**
      * Removes a tournament at a specific index from the list of tournaments.
      * @param idx The index of the element to be removed.
