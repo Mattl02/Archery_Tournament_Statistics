@@ -5,6 +5,8 @@
  */
 package tournament;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author Matthias
@@ -136,7 +138,14 @@ public class TournamentGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_miAddTournamentActionPerformed
 
     private void miRemoveTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveTournamentActionPerformed
-        // TODO add your handling code here:
+        if(listTournaments.getSelectedIndices().length > 0){
+            if(listTournaments.getSelectedIndices().length > 1){
+                tlm.remove(listTournaments.getSelectedIndices());
+            }
+            else{
+                tlm.remove(listTournaments.getSelectedIndex());
+            }
+        }
     }//GEN-LAST:event_miRemoveTournamentActionPerformed
 
     private void miAddParticipantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddParticipantActionPerformed
