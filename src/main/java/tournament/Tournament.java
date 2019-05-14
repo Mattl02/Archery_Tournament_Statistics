@@ -3,7 +3,9 @@ package tournament;
 
 import bl.Participant;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  *
@@ -20,6 +22,9 @@ public class Tournament {
         this.start = start;
         this.end = end;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return String.format("%s: %s", name, start.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
+    }
 }

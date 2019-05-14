@@ -11,7 +11,7 @@ package tournament;
  */
 public class TournamentGUI extends javax.swing.JFrame {
 
-    
+    private TournamentListModel tlm;
     
     
     /**
@@ -19,6 +19,9 @@ public class TournamentGUI extends javax.swing.JFrame {
      */
     public TournamentGUI() {
         initComponents();
+        
+        tlm = new TournamentListModel();
+        listTournaments.setModel(tlm);
         
         listTournaments.setComponentPopupMenu(jPopupMenu1);
         listParticipants.setComponentPopupMenu(jPopupMenu2);
@@ -125,7 +128,11 @@ public class TournamentGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miAddTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddTournamentActionPerformed
-        // TODO add your handling code here:
+        TournamentDialog dialog = new TournamentDialog(this, true);
+        dialog.setVisible(true);
+        if(dialog.isOk()){
+            tlm.add(dialog.getTournament());
+        }
     }//GEN-LAST:event_miAddTournamentActionPerformed
 
     private void miRemoveTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveTournamentActionPerformed

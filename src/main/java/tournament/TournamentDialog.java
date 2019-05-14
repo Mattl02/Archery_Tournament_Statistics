@@ -7,6 +7,7 @@ package tournament;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -58,11 +59,11 @@ public class TournamentDialog extends javax.swing.JDialog {
         getContentPane().add(lbName);
         getContentPane().add(tfName);
 
-        lbStart.setText("Start-time (dd.mm.yyyy HH:ss)");
+        lbStart.setText("Start-time (dd.mm.yyyy HH:mm)");
         getContentPane().add(lbStart);
         getContentPane().add(tfStart);
 
-        lbEnd.setText("End-time (dd.mm.yyyy HH:ss)");
+        lbEnd.setText("End-time (dd.mm.yyyy HH:mm)");
         getContentPane().add(lbEnd);
         getContentPane().add(tfEnd);
 
@@ -92,11 +93,18 @@ public class TournamentDialog extends javax.swing.JDialog {
 
     private void btOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOkActionPerformed
         try{
-            this.tournament = new Tournament(tfName.getText(),
-                    LocalDateTime.parse(tfStart.getText(),
-                            DateTimeFormatter.ofPattern("dd.mm.yyyy HH:ss")),
-                    LocalDateTime.parse(tfEnd.getText(),
-                            DateTimeFormatter.ofPattern("dd.mm.yyyy HH:ss")));
+            LocalDateTime start = LocalDateTime.parse(tfStart.getText(),
+                            DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+            LocalDateTime end = LocalDateTime.parse(tfEnd.getText(),
+                            DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+            
+            if(end.compareTo(start) <= 0){
+                JOptionPane.showMessageDialog(this,
+                        "End-date mustn't be earlier or the same as start-date!");
+                return;
+            }
+            
+            this.tournament = new Tournament(tfName.getText(), start, end);
         }
         catch(Exception ex){
             ex.printStackTrace();

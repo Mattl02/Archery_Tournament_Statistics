@@ -34,14 +34,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lbStart">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Start-time (dd.mm.yyyy HH:ss)"/>
+        <Property name="text" type="java.lang.String" value="Start-time (dd.mm.yyyy HH:mm)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfStart">
     </Component>
     <Component class="javax.swing.JLabel" name="lbEnd">
       <Properties>
-        <Property name="text" type="java.lang.String" value="End-time (dd.mm.yyyy HH:ss)"/>
+        <Property name="text" type="java.lang.String" value="End-time (dd.mm.yyyy HH:mm)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfEnd">
