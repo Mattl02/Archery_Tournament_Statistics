@@ -5,7 +5,6 @@ import bl.Participant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  *
@@ -22,6 +21,20 @@ public class Tournament {
         this.start = start;
         this.end = end;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
+    }
+    
+    
 
     @Override
     public String toString() {

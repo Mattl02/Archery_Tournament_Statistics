@@ -17,6 +17,7 @@ public class TournamentDialog extends javax.swing.JDialog {
 
     private Tournament tournament;
     private boolean ok;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     public Tournament getTournament() {
         return tournament;
@@ -32,6 +33,18 @@ public class TournamentDialog extends javax.swing.JDialog {
     public TournamentDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    public TournamentDialog(java.awt.Frame parent, boolean modal, Tournament t){
+        super(parent, modal);
+        initComponents();
+        initExistingTournament(t);
+    }
+    
+    public void initExistingTournament(Tournament t) {
+        tfName.setText(t.getName());
+        tfStart.setText(t.getStart().format(dtf));
+        tfEnd.setText(t.getEnd().format(dtf));
     }
 
     /**
@@ -93,10 +106,8 @@ public class TournamentDialog extends javax.swing.JDialog {
 
     private void btOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOkActionPerformed
         try{
-            LocalDateTime start = LocalDateTime.parse(tfStart.getText(),
-                            DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
-            LocalDateTime end = LocalDateTime.parse(tfEnd.getText(),
-                            DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+            LocalDateTime start = LocalDateTime.parse(tfStart.getText(), dtf);
+            LocalDateTime end = LocalDateTime.parse(tfEnd.getText(), dtf);
             
             if(end.compareTo(start) <= 0){
                 JOptionPane.showMessageDialog(this,

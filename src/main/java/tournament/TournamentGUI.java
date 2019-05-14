@@ -6,6 +6,7 @@
 package tournament;
 
 import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,6 +42,7 @@ public class TournamentGUI extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         miAddTournament = new javax.swing.JMenuItem();
         miRemoveTournament = new javax.swing.JMenuItem();
+        miEditTournament = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         miAddParticipant = new javax.swing.JMenuItem();
         miRemoveParticipant = new javax.swing.JMenuItem();
@@ -67,6 +69,14 @@ public class TournamentGUI extends javax.swing.JFrame {
             }
         });
         jPopupMenu1.add(miRemoveTournament);
+
+        miEditTournament.setText("Edit Tournament");
+        miEditTournament.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miEditTournamentActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(miEditTournament);
 
         miAddParticipant.setText("Add Participant");
         miAddParticipant.addActionListener(new java.awt.event.ActionListener() {
@@ -156,6 +166,23 @@ public class TournamentGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_miRemoveParticipantActionPerformed
 
+    private void miEditTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditTournamentActionPerformed
+        if(listTournaments.getSelectedIndices().length > 1){
+            JOptionPane.showMessageDialog(this,
+                    "Please only select one tournament to edit.");
+        }
+        else{
+            int idx = listTournaments.getSelectedIndex();
+            TournamentDialog dialog = new TournamentDialog(this, true,
+                    (Tournament) tlm.getElementAt(listTournaments.getSelectedIndex()));
+            dialog.setVisible(true);
+            if(dialog.isOk()){
+                tlm.remove(idx);
+                tlm.add(idx, dialog.getTournament());
+            }
+        }
+    }//GEN-LAST:event_miEditTournamentActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -200,6 +227,7 @@ public class TournamentGUI extends javax.swing.JFrame {
     private javax.swing.JList<String> listTournaments;
     private javax.swing.JMenuItem miAddParticipant;
     private javax.swing.JMenuItem miAddTournament;
+    private javax.swing.JMenuItem miEditTournament;
     private javax.swing.JMenuItem miRemoveParticipant;
     private javax.swing.JMenuItem miRemoveTournament;
     private javax.swing.JPanel panelEast;
