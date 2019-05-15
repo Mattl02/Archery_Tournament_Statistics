@@ -5,7 +5,10 @@
  */
 package tournament;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +28,11 @@ public class TournamentGUI extends javax.swing.JFrame {
         
         tlm = new TournamentListModel();
         listTournaments.setModel(tlm);
+        try {
+            tlm.loadFromDatabase();
+        } catch (SQLException ex) {
+            Logger.getLogger(TournamentGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         listTournaments.setComponentPopupMenu(jPopupMenu1);
         listParticipants.setComponentPopupMenu(jPopupMenu2);

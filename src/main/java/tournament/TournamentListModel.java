@@ -1,7 +1,12 @@
 
 package tournament;
 
+import database.DatabaseManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
 
 /**
@@ -11,6 +16,15 @@ import javax.swing.AbstractListModel;
 public class TournamentListModel extends AbstractListModel{
 
     private ArrayList<Tournament> tournaments = new ArrayList<>();
+    private DatabaseManager dm;
+    
+    {
+        try {
+            dm = DatabaseManager.getInstance();
+        } catch (SQLException ex) {
+            Logger.getLogger(TournamentListModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     /**
      * Adds a tournament into the list of tournaments.
@@ -63,6 +77,14 @@ public class TournamentListModel extends AbstractListModel{
     @Override
     public Object getElementAt(int i) {
         return tournaments.get(i);
+    }
+    
+    public void loadFromDatabase() throws SQLException {
+        ResultSet res = dm.executeQuery("SELECT * FROM tournaments;");
+        while(res.next()){
+            this.add(new Tournament(res.getString(2), res.getDate(3).toLocalDate()));
+        }
+        this.fireIntervalAdded(this, 0, tournaments.size()-1);
     }
     
 }
