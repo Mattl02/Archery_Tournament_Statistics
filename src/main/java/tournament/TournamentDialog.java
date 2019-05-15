@@ -5,9 +5,8 @@
  */
 package tournament;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,7 +16,7 @@ public class TournamentDialog extends javax.swing.JDialog {
 
     private Tournament tournament;
     private boolean ok;
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public Tournament getTournament() {
         return tournament;
@@ -43,8 +42,7 @@ public class TournamentDialog extends javax.swing.JDialog {
     
     public void initExistingTournament(Tournament t) {
         tfName.setText(t.getName());
-        tfStart.setText(t.getStart().format(dtf));
-        tfEnd.setText(t.getEnd().format(dtf));
+        tfStart.setText(t.getDate().format(dtf));
     }
 
     /**
@@ -60,25 +58,19 @@ public class TournamentDialog extends javax.swing.JDialog {
         tfName = new javax.swing.JTextField();
         lbStart = new javax.swing.JLabel();
         tfStart = new javax.swing.JTextField();
-        lbEnd = new javax.swing.JLabel();
-        tfEnd = new javax.swing.JTextField();
         btCancel = new javax.swing.JButton();
         btOk = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout(4, 2));
+        getContentPane().setLayout(new java.awt.GridLayout(3, 2));
 
         lbName.setText("Name");
         getContentPane().add(lbName);
         getContentPane().add(tfName);
 
-        lbStart.setText("Start-time (dd.mm.yyyy HH:mm)");
+        lbStart.setText("Date (dd.mm.yyyy)");
         getContentPane().add(lbStart);
         getContentPane().add(tfStart);
-
-        lbEnd.setText("End-time (dd.mm.yyyy HH:mm)");
-        getContentPane().add(lbEnd);
-        getContentPane().add(tfEnd);
 
         btCancel.setText("Cancel");
         btCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -106,16 +98,9 @@ public class TournamentDialog extends javax.swing.JDialog {
 
     private void btOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOkActionPerformed
         try{
-            LocalDateTime start = LocalDateTime.parse(tfStart.getText(), dtf);
-            LocalDateTime end = LocalDateTime.parse(tfEnd.getText(), dtf);
+            LocalDate date = LocalDate.parse(tfStart.getText(), dtf);
             
-            if(end.compareTo(start) <= 0){
-                JOptionPane.showMessageDialog(this,
-                        "End-date mustn't be earlier or the same as start-date!");
-                return;
-            }
-            
-            this.tournament = new Tournament(tfName.getText(), start, end);
+            this.tournament = new Tournament(tfName.getText(), date);
         }
         catch(Exception ex){
             ex.printStackTrace();
@@ -169,10 +154,8 @@ public class TournamentDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancel;
     private javax.swing.JButton btOk;
-    private javax.swing.JLabel lbEnd;
     private javax.swing.JLabel lbName;
     private javax.swing.JLabel lbStart;
-    private javax.swing.JTextField tfEnd;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfStart;
     // End of variables declaration//GEN-END:variables
