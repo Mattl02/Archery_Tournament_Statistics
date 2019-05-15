@@ -12,7 +12,9 @@ import java.sql.Statement;
  * @author Matthias
  */
 public class DatabaseManager {
-    private static Connection conn;
+    
+    private static DatabaseManager theInstance;
+    private Connection conn;
 
     public DatabaseManager() throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/archery_tournament_statistics", "postgres", "postgres");
@@ -21,6 +23,13 @@ public class DatabaseManager {
     public ResultSet executeQuery(String query) throws SQLException {
         Statement s = conn.createStatement();
         return s.executeQuery(query);
+    }
+    
+    public static synchronized DatabaseManager getInstance() throws SQLException{
+        if(theInstance == null){
+            theInstance = new DatabaseManager();
+        }
+        return theInstance;
     }
     
 //    public static void main(String[] args) {
