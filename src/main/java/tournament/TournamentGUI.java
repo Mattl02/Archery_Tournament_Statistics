@@ -6,10 +6,12 @@
 package tournament;
 
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import participant.ParticipantListModel;
 
 /**
  *
@@ -18,6 +20,7 @@ import javax.swing.JOptionPane;
 public class TournamentGUI extends javax.swing.JFrame {
 
     private TournamentListModel tlm;
+    private LinkedList<ParticipantListModel> participantModels;
     
     
     /**
@@ -29,10 +32,12 @@ public class TournamentGUI extends javax.swing.JFrame {
         tlm = new TournamentListModel();
         listTournaments.setModel(tlm);
         try {
-            tlm.loadFromDatabase();
+            participantModels.addAll(tlm.loadFromDatabase());
         } catch (SQLException ex) {
             Logger.getLogger(TournamentGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        listParticipants.setModel(new DefaultListModel());
         
         listTournaments.setComponentPopupMenu(jPopupMenu1);
         listParticipants.setComponentPopupMenu(jPopupMenu2);
@@ -156,6 +161,7 @@ public class TournamentGUI extends javax.swing.JFrame {
         dialog.setVisible(true);
         if(dialog.isOk()){
             tlm.add(dialog.getTournament());
+            participantModels.add(new ParticipantListModel());
         }
     }//GEN-LAST:event_miAddTournamentActionPerformed
 

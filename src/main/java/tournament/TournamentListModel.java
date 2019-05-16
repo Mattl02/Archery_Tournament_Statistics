@@ -6,10 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
+import participant.ParticipantListModel;
 
 /**
  *
@@ -81,12 +82,15 @@ public class TournamentListModel extends AbstractListModel{
         return tournaments.get(i);
     }
     
-    public void loadFromDatabase() throws SQLException {
+    public LinkedList<ParticipantListModel> loadFromDatabase() throws SQLException {
+        LinkedList<ParticipantListModel> partModels = new LinkedList<>();
         ResultSet res = dm.executeQuery("SELECT * FROM tournaments;");
         while(res.next()){
             this.add(new Tournament(res.getString("name"), res.getDate("date").toLocalDate()));
+            partModels.add(new ParticipantListModel());
         }
         this.fireIntervalAdded(this, 0, tournaments.size()-1);
+        return partModels;
     }
     
     public void saveToDatabase() throws SQLException {
