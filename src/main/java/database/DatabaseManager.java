@@ -25,6 +25,11 @@ public class DatabaseManager {
         return s.executeQuery(query);
     }
     
+    public int executeUpdate(String query) throws SQLException {
+        Statement s = conn.createStatement();
+        return s.executeUpdate(query);
+    }
+    
     public static synchronized DatabaseManager getInstance() throws SQLException{
         if(theInstance == null){
             theInstance = new DatabaseManager();

@@ -4,7 +4,9 @@ package tournament;
 import database.DatabaseManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
@@ -82,9 +84,26 @@ public class TournamentListModel extends AbstractListModel{
     public void loadFromDatabase() throws SQLException {
         ResultSet res = dm.executeQuery("SELECT * FROM tournaments;");
         while(res.next()){
-            this.add(new Tournament(res.getString(2), res.getDate(3).toLocalDate()));
+            this.add(new Tournament(res.getString("name"), res.getDate("date").toLocalDate()));
         }
         this.fireIntervalAdded(this, 0, tournaments.size()-1);
     }
     
+    public void saveToDatabase() throws SQLException {
+        for (Tournament t : tournaments) {
+            ResultSet res = dm.executeQuery("SELECT * FROM tournaments WHERE name='"
+                    +t.getName()+"' AND date=TO_DATE('"
+                    +t.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                    +"','DD.MM.YYYY');");
+            if(res.next()){
+                System.out.println(res.getInt("tournamentid")+"");
+            }
+            else{
+                dm.executeUpdate("INSERT INTO tournaments(name,date) VALUES('"
+                        +t.getName()+"',TO_DATE('"
+                        +t.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                        +"','DD.MM.YYYY'));");
+            }
+        }   
+    }
 }

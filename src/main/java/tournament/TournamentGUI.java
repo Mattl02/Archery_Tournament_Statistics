@@ -58,6 +58,9 @@ public class TournamentGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listTournaments = new javax.swing.JList<>();
         panelWestSouth = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btSaveToDatabase = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         panelEast = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listParticipants = new javax.swing.JList<>();
@@ -116,16 +119,17 @@ public class TournamentGUI extends javax.swing.JFrame {
 
         panelWest.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout panelWestSouthLayout = new javax.swing.GroupLayout(panelWestSouth);
-        panelWestSouth.setLayout(panelWestSouthLayout);
-        panelWestSouthLayout.setHorizontalGroup(
-            panelWestSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-        panelWestSouthLayout.setVerticalGroup(
-            panelWestSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        panelWestSouth.setLayout(new java.awt.GridLayout(3, 1));
+        panelWestSouth.add(jLabel1);
+
+        btSaveToDatabase.setText("Save To Database");
+        btSaveToDatabase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSaveToDatabaseActionPerformed(evt);
+            }
+        });
+        panelWestSouth.add(btSaveToDatabase);
+        panelWestSouth.add(jLabel2);
 
         panelWest.add(panelWestSouth, java.awt.BorderLayout.SOUTH);
 
@@ -191,6 +195,14 @@ public class TournamentGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_miEditTournamentActionPerformed
 
+    private void btSaveToDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveToDatabaseActionPerformed
+        try {
+            tlm.saveToDatabase();
+        } catch (SQLException ex) {
+            Logger.getLogger(TournamentGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btSaveToDatabaseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -227,6 +239,9 @@ public class TournamentGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSaveToDatabase;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
