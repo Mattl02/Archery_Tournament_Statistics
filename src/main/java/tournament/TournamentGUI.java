@@ -11,6 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import participant.Participant;
 import participant.ParticipantListModel;
 
 /**
@@ -20,7 +23,7 @@ import participant.ParticipantListModel;
 public class TournamentGUI extends javax.swing.JFrame {
 
     private TournamentListModel tlm;
-    private LinkedList<ParticipantListModel> participantModels;
+    private LinkedList<ParticipantListModel> participantModels = new LinkedList<>();
     
     
     /**
@@ -36,7 +39,13 @@ public class TournamentGUI extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(TournamentGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        listTournaments.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                listParticipants.setModel(participantModels.get(listTournaments.getSelectedIndex()));
+            }
+            
+        });
         listParticipants.setModel(new DefaultListModel());
         
         listTournaments.setComponentPopupMenu(jPopupMenu1);
@@ -177,11 +186,21 @@ public class TournamentGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_miRemoveTournamentActionPerformed
 
     private void miAddParticipantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddParticipantActionPerformed
-        // TODO add your handling code here:
+        if(listTournaments.getSelectedIndices().length > 0) {
+            String s = JOptionPane.showInputDialog(this, "Enter a name for the participant.");
+            if (s != null) {
+                participantModels.get(listTournaments.getSelectedIndex()).add(new Participant(s));
+            }
+        }
     }//GEN-LAST:event_miAddParticipantActionPerformed
 
     private void miRemoveParticipantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveParticipantActionPerformed
-        // TODO add your handling code here:
+        if(listParticipants.getSelectedIndices().length > 1){
+            participantModels.get(listTournaments.getSelectedIndex()).remove(listParticipants.getSelectedIndices());
+        }
+        else{
+            participantModels.get(listTournaments.getSelectedIndex()).remove(listParticipants.getSelectedIndex());
+        }
     }//GEN-LAST:event_miRemoveParticipantActionPerformed
 
     private void miEditTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditTournamentActionPerformed
