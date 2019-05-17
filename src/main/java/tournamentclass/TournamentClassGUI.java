@@ -6,6 +6,7 @@
 package tournamentclass;
 
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -22,8 +23,15 @@ public class TournamentClassGUI extends javax.swing.JFrame {
         initComponents();
         
         liClasses.setModel(model);
+        model.add(new TournamentClass("undefined"));
+        
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         this.updateCounts();
+    }
+
+    public TournamentClassListModel getTournamentClassModel() {
+        return model;
     }
     
     public void updateCounts(){
@@ -164,6 +172,8 @@ public class TournamentClassGUI extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;

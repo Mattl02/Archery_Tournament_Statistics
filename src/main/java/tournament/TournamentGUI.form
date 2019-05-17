@@ -56,6 +56,14 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miRemoveParticipantActionPerformed"/>
           </Events>
         </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="miSetTournamentClass">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Set Class for selected participants"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miSetTournamentClassActionPerformed"/>
+          </Events>
+        </MenuItem>
       </SubComponents>
     </Container>
   </NonVisualComponents>
@@ -130,7 +138,13 @@
             <Property name="rows" type="int" value="3"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JButton" name="btEditTournamentClasses">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Edit Classes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEditTournamentClassesActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btSaveToDatabase">
               <Properties>

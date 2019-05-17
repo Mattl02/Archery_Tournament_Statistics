@@ -1,6 +1,8 @@
 
 package participant;
 
+import tournamentclass.TournamentClass;
+
 /**
  *
  * @author Matthias
@@ -8,10 +10,12 @@ package participant;
 public class Participant {
     private String name;
     private int score;
+    private TournamentClass tournamentclass;
 
-    public Participant(String name) {
+    public Participant(String name, TournamentClass c) {
         this.name = name;
         this.score = 0;
+        this.tournamentclass = c;
     }
     
     public void addScore(int points){
@@ -26,8 +30,16 @@ public class Participant {
         return score;
     }
 
+    public TournamentClass getTournamentclass() {
+        return tournamentclass;
+    }
+
+    public void setTournamentclass(TournamentClass tournamentclass) {
+        this.tournamentclass = tournamentclass;
+    }
+
     @Override
     public String toString() {
-        return String.format("%s: %d", name, score);
+        return String.format("%s(%s): %d", name, tournamentclass, score);
     }
 }

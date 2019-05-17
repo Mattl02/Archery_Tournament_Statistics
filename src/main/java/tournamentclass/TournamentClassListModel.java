@@ -26,6 +26,7 @@ public class TournamentClassListModel extends AbstractListModel{
      * @param idx The index of the element to be removed.
      */
     public void remove(int idx) {
+        if(classes.get(idx).getClassName().equals("undefined")) return;
         classes.remove(idx);
         this.fireContentsChanged(this, 0, classes.size()-1);
     }
@@ -36,11 +37,15 @@ public class TournamentClassListModel extends AbstractListModel{
      */
     public void remove(int[] idx) {
         for(int i = idx.length-1; i >= 0; i--){
+            if(classes.get(i).getClassName().equals("undefined")) continue;
             classes.remove(idx[i]);
         }
         this.fireContentsChanged(this, 0, classes.size()-1);
     }
-    
+
+    public ArrayList<TournamentClass> getClasses() {
+        return classes;
+    }
     /**
      * 
      * @return The number of tournament-classes in the list.

@@ -15,6 +15,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import participant.Participant;
 import participant.ParticipantListModel;
+import tournamentclass.TournamentClassChooser;
+import tournamentclass.TournamentClassGUI;
 
 /**
  *
@@ -24,6 +26,8 @@ public class TournamentGUI extends javax.swing.JFrame {
 
     private TournamentListModel tlm;
     private LinkedList<ParticipantListModel> participantModels = new LinkedList<>();
+    
+    private TournamentClassGUI tcGUI;
     
     
     /**
@@ -48,6 +52,8 @@ public class TournamentGUI extends javax.swing.JFrame {
         });
         listParticipants.setModel(new DefaultListModel());
         
+        tcGUI = new TournamentClassGUI();
+        
         listTournaments.setComponentPopupMenu(jPopupMenu1);
         listParticipants.setComponentPopupMenu(jPopupMenu2);
     }
@@ -68,11 +74,12 @@ public class TournamentGUI extends javax.swing.JFrame {
         jPopupMenu2 = new javax.swing.JPopupMenu();
         miAddParticipant = new javax.swing.JMenuItem();
         miRemoveParticipant = new javax.swing.JMenuItem();
+        miSetTournamentClass = new javax.swing.JMenuItem();
         panelWest = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listTournaments = new javax.swing.JList<>();
         panelWestSouth = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        btEditTournamentClasses = new javax.swing.JButton();
         btSaveToDatabase = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         panelEast = new javax.swing.JPanel();
@@ -119,6 +126,14 @@ public class TournamentGUI extends javax.swing.JFrame {
         });
         jPopupMenu2.add(miRemoveParticipant);
 
+        miSetTournamentClass.setText("Set Class for selected participants");
+        miSetTournamentClass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSetTournamentClassActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(miSetTournamentClass);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(1, 2));
 
@@ -134,7 +149,14 @@ public class TournamentGUI extends javax.swing.JFrame {
         panelWest.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         panelWestSouth.setLayout(new java.awt.GridLayout(3, 1));
-        panelWestSouth.add(jLabel1);
+
+        btEditTournamentClasses.setText("Edit Classes");
+        btEditTournamentClasses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditTournamentClassesActionPerformed(evt);
+            }
+        });
+        panelWestSouth.add(btEditTournamentClasses);
 
         btSaveToDatabase.setText("Save To Database");
         btSaveToDatabase.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +213,7 @@ public class TournamentGUI extends javax.swing.JFrame {
         if(listTournaments.getSelectedIndices().length > 0) {
             String s = JOptionPane.showInputDialog(this, "Enter a name for the participant.");
             if (s != null) {
-                participantModels.get(listTournaments.getSelectedIndex()).add(new Participant(s));
+                participantModels.get(listTournaments.getSelectedIndex()).add(new Participant(s, tcGUI.getTournamentClassModel().getElementAt(0)));
             }
         }
     }//GEN-LAST:event_miAddParticipantActionPerformed
@@ -230,6 +252,22 @@ public class TournamentGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btSaveToDatabaseActionPerformed
 
+    private void btEditTournamentClassesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditTournamentClassesActionPerformed
+        tcGUI.setVisible(true);
+    }//GEN-LAST:event_btEditTournamentClassesActionPerformed
+
+    private void miSetTournamentClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSetTournamentClassActionPerformed
+        if(listParticipants.getSelectedIndices().length > 0) {
+            TournamentClassChooser chooser = new TournamentClassChooser(this, true, tcGUI.getTournamentClassModel().getClasses());
+            chooser.setVisible(true);
+            if(chooser.isOk()){
+                participantModels.get(listTournaments.getSelectedIndex())
+                        .setClasses(listParticipants.getSelectedIndices(),
+                                chooser.getChosenClass());
+            }
+        }
+    }//GEN-LAST:event_miSetTournamentClassActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -266,8 +304,8 @@ public class TournamentGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btEditTournamentClasses;
     private javax.swing.JButton btSaveToDatabase;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
@@ -280,6 +318,7 @@ public class TournamentGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem miEditTournament;
     private javax.swing.JMenuItem miRemoveParticipant;
     private javax.swing.JMenuItem miRemoveTournament;
+    private javax.swing.JMenuItem miSetTournamentClass;
     private javax.swing.JPanel panelEast;
     private javax.swing.JPanel panelWest;
     private javax.swing.JPanel panelWestSouth;
