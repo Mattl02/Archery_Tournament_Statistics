@@ -7,6 +7,7 @@ package tournament;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,6 +59,8 @@ public class TournamentGUI extends javax.swing.JFrame {
         listTournaments.setComponentPopupMenu(jPopupMenu1);
         listParticipants.setComponentPopupMenu(jPopupMenu2);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -375,7 +378,16 @@ public class TournamentGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btSaveToFileActionPerformed
 
     private void btLoadToFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoadToFileActionPerformed
-        // TODO add your handling code here:
+        try {
+            ArrayList<Participant> participants = tlm.loadFromFile();
+            ParticipantListModel pm = new ParticipantListModel((Tournament) tlm.getElementAt(tlm.getSize()-1));
+            for (Participant p : participants) {
+                pm.add(p);
+            }
+            participantModels.add(pm);
+        } catch (IOException ex) {
+            Logger.getLogger(TournamentGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btLoadToFileActionPerformed
 
     /**

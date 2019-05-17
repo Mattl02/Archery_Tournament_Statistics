@@ -2,12 +2,15 @@
 package tournament;
 
 import database.DatabaseManager;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -130,4 +133,25 @@ public class TournamentListModel extends AbstractListModel{
         }   
     }
     
+    public ArrayList<Participant> loadFromFile() throws IOException {
+        JFileChooser chooser = new JFileChooser();
+        ArrayList<Participant> participants = new ArrayList<>();
+        Tournament tournament = null;
+        if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+            File file = chooser.getSelectedFile();
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = br.readLine();
+            String[] parts = line.split(",");
+            tournament = new Tournament(parts[0], LocalDate.parse(parts[1], DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+            while((line = br.readLine()) != null){
+                parts = line.split(",");
+                Participant p = new Participant(parts[0], new TournamentClass(parts[1]));
+                p.addScore(Integer.parseInt(parts[2]));
+                participants.add(p);
+            }
+        }
+        
+        this.add(tournament);
+        return participants;
+    }
 }

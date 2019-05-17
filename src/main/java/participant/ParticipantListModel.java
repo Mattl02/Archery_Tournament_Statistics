@@ -1,12 +1,15 @@
 package participant;
 
 import database.DatabaseManager;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.AbstractListModel;
@@ -111,6 +114,10 @@ public class ParticipantListModel extends AbstractListModel{
         else System.out.println("alarm");
     }
     
+    /**
+     * 
+     * @throws IOException 
+     */
     public void saveToFile() throws IOException{
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
