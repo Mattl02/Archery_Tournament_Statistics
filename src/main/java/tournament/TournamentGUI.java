@@ -177,9 +177,11 @@ public class TournamentGUI extends javax.swing.JFrame {
     private void miRemoveTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveTournamentActionPerformed
         if(listTournaments.getSelectedIndices().length > 0){
             if(listTournaments.getSelectedIndices().length > 1){
+                participantModels.remove(listTournaments.getSelectedIndices());
                 tlm.remove(listTournaments.getSelectedIndices());
             }
             else{
+                participantModels.remove(listTournaments.getSelectedIndex());
                 tlm.remove(listTournaments.getSelectedIndex());
             }
         }
