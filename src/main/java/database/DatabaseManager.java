@@ -36,15 +36,4 @@ public class DatabaseManager {
         }
         return theInstance;
     }
-    
-//    public static void main(String[] args) {
-//        try {
-//            DatabaseManager dm = new DatabaseManager();
-//            ResultSet res = dm.executeQuery("SELECT * FROM tournaments");
-//            res.next();
-//            System.out.println(res.getString(2));
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
 }

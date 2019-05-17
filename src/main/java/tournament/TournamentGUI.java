@@ -75,6 +75,8 @@ public class TournamentGUI extends javax.swing.JFrame {
         miAddParticipant = new javax.swing.JMenuItem();
         miRemoveParticipant = new javax.swing.JMenuItem();
         miSetTournamentClass = new javax.swing.JMenuItem();
+        miAddPoints = new javax.swing.JMenuItem();
+        miRemovePoints = new javax.swing.JMenuItem();
         panelWest = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listTournaments = new javax.swing.JList<>();
@@ -133,6 +135,22 @@ public class TournamentGUI extends javax.swing.JFrame {
             }
         });
         jPopupMenu2.add(miSetTournamentClass);
+
+        miAddPoints.setText("Add points to score");
+        miAddPoints.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAddPointsActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(miAddPoints);
+
+        miRemovePoints.setText("Remove points from score");
+        miRemovePoints.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRemovePointsActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(miRemovePoints);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(1, 2));
@@ -269,6 +287,57 @@ public class TournamentGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_miSetTournamentClassActionPerformed
 
+    private void miAddPointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddPointsActionPerformed
+        if(listParticipants.getSelectedIndices().length == 1){
+            String s = JOptionPane.showInputDialog(this, "Enter the amount of points to add:");
+            if(s != null && !s.isEmpty()){
+                int points = 0;
+                try{
+                    points = Integer.parseInt(s);
+                }
+                catch(NumberFormatException nfe) {}
+                if(points <= 0) {
+                    JOptionPane.showMessageDialog(this, "Please enter a positive whole number");
+                }
+                else{
+                    participantModels.get(listTournaments.getSelectedIndex())
+                            .addPointsTo(points, listParticipants.getSelectedIndex());
+                }
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Please select one participant.");
+        }
+    }//GEN-LAST:event_miAddPointsActionPerformed
+
+    private void miRemovePointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemovePointsActionPerformed
+        if(listParticipants.getSelectedIndices().length == 1){
+            String s = JOptionPane.showInputDialog(this, "Enter the amount of points to remove:");
+            if(s != null && !s.isEmpty()){
+                int points = 0;
+                try{
+                    points = Integer.parseInt(s);
+                }
+                catch(NumberFormatException nfe) {}
+                if(points <= 0) {
+                    JOptionPane.showMessageDialog(this, "Please enter a positive whole number");
+                }
+                else if(((Participant)participantModels.get(listTournaments.getSelectedIndex())
+                        .getElementAt(listParticipants.getSelectedIndex())).getScore() < points){
+                    JOptionPane.showMessageDialog(this, "The number entered exceeds the participant's score");
+                }
+                else{
+                    points = -1 * points;
+                    participantModels.get(listTournaments.getSelectedIndex())
+                            .addPointsTo(points, listParticipants.getSelectedIndex());
+                }
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Please select one participant.");
+        }
+    }//GEN-LAST:event_miRemovePointsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -315,9 +384,11 @@ public class TournamentGUI extends javax.swing.JFrame {
     private javax.swing.JList<String> listParticipants;
     private javax.swing.JList<String> listTournaments;
     private javax.swing.JMenuItem miAddParticipant;
+    private javax.swing.JMenuItem miAddPoints;
     private javax.swing.JMenuItem miAddTournament;
     private javax.swing.JMenuItem miEditTournament;
     private javax.swing.JMenuItem miRemoveParticipant;
+    private javax.swing.JMenuItem miRemovePoints;
     private javax.swing.JMenuItem miRemoveTournament;
     private javax.swing.JMenuItem miSetTournamentClass;
     private javax.swing.JPanel panelEast;

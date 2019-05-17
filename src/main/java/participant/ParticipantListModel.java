@@ -41,6 +41,11 @@ public class ParticipantListModel extends AbstractListModel{
         this.fireContentsChanged(this, 0, participants.size()-1);
     }
     
+    public void addPointsTo(int points, int idx){
+        participants.get(idx).addScore(points);
+        
+    }
+    
     @Override
     public int getSize() {
         return participants.size();
