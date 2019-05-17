@@ -5,6 +5,9 @@
  */
 package tournamentclass;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
@@ -23,7 +26,11 @@ public class TournamentClassGUI extends javax.swing.JFrame {
         initComponents();
         
         liClasses.setModel(model);
-        model.add(new TournamentClass("undefined"));
+        try {
+            model.loadFromDatabase();
+        } catch (SQLException ex) {
+            Logger.getLogger(TournamentClassGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
@@ -32,6 +39,14 @@ public class TournamentClassGUI extends javax.swing.JFrame {
 
     public TournamentClassListModel getTournamentClassModel() {
         return model;
+    }
+    
+    public void saveClassesToDatabase() {
+        try {
+            model.saveToDatabase();
+        } catch (SQLException ex) {
+            Logger.getLogger(TournamentClassGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void updateCounts(){

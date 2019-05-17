@@ -20,6 +20,4 @@ public class TournamentClass {
     public String toString() {
         return this.className;
     }
-    
-    
 }

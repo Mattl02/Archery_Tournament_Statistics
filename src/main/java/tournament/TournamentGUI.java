@@ -247,6 +247,7 @@ public class TournamentGUI extends javax.swing.JFrame {
     private void btSaveToDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveToDatabaseActionPerformed
         try {
             tlm.saveToDatabase();
+            tcGUI.saveClassesToDatabase();
         } catch (SQLException ex) {
             Logger.getLogger(TournamentGUI.class.getName()).log(Level.SEVERE, null, ex);
         }

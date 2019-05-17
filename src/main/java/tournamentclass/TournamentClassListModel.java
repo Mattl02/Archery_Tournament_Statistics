@@ -1,6 +1,9 @@
 
 package tournamentclass;
 
+import database.DatabaseManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.AbstractListModel;
 
@@ -11,6 +14,17 @@ import javax.swing.AbstractListModel;
 public class TournamentClassListModel extends AbstractListModel{
 
     private ArrayList<TournamentClass> classes = new ArrayList<>();
+    private DatabaseManager dm;
+    
+    {
+        try{
+            dm = DatabaseManager.getInstance();
+        }
+        catch(SQLException se) {
+            //classes.add(new TournamentClass("undefined"));
+            se.printStackTrace();
+        }
+    }
     
     /**
      * Adds a class into the list of tournament-classes.
@@ -63,6 +77,31 @@ public class TournamentClassListModel extends AbstractListModel{
     @Override
     public TournamentClass getElementAt(int i) {
         return classes.get(i);
+    }
+    
+    public void loadFromDatabase() throws SQLException {
+        ResultSet res = dm.executeQuery("SELECT * FROM tournamentclasses");
+        boolean undefined = false;
+        while(res.next()) {
+            if(res.getString("classname").equals("undefined")) undefined = true;
+            classes.add(new TournamentClass(res.getString("classname")));
+        }
+        if(!undefined) classes.add(0, new TournamentClass("undefined"));
+        this.fireIntervalAdded(this, 0, classes.size()-1);
+    }
+    
+    public void saveToDatabase() throws SQLException {
+        for(int i = 1; i < classes.size(); i++){
+            ResultSet res = dm.executeQuery("SELECT * FROM tournamentclasses "
+                    + "WHERE classname='"+classes.get(i).getClassName()+"';");
+            if(res.next()){
+                System.out.println(res.getString("classname"));
+            }
+            else {
+                dm.executeUpdate("INSERT INTO tournamentclasses(classname) "
+                        + "VALUES('"+classes.get(i).getClassName()+"');");
+            }
+        }
     }
 
 }
