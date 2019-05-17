@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 /**
- *
+ * A GUI that displays all tournament-classes.
  * @author Matthias
  */
 public class TournamentClassGUI extends javax.swing.JFrame {
@@ -41,6 +41,9 @@ public class TournamentClassGUI extends javax.swing.JFrame {
         return model;
     }
     
+    /**
+     * Calls the save method in the tournament-class-model.
+     */
     public void saveClassesToDatabase() {
         try {
             model.saveToDatabase();
@@ -49,6 +52,9 @@ public class TournamentClassGUI extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Updates the count-textfield
+     */
     public void updateCounts(){
         tfClassCount.setText(model.getSize()+"");
         tfUnusedClassCount.setText(model.getSize()+"");

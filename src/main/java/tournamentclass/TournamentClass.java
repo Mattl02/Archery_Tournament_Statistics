@@ -2,7 +2,7 @@
 package tournamentclass;
 
 /**
- *
+ * A class that can be assigned to participants.
  * @author Matthias
  */
 public class TournamentClass {

@@ -3,10 +3,8 @@ package tournament;
 
 import database.DatabaseManager;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +21,7 @@ import participant.ParticipantListModel;
 import tournamentclass.TournamentClass;
 
 /**
- *
+ * ListModel for tournaments
  * @author Matthias
  */
 public class TournamentListModel extends AbstractListModel{
@@ -92,6 +90,11 @@ public class TournamentListModel extends AbstractListModel{
         return tournaments.get(i);
     }
     
+    /**
+     * Loads tournaments from the database.
+     * @return A list of the participant-listmodels for each tournament.
+     * @throws SQLException SQL Exception
+     */
     public LinkedList<ParticipantListModel> loadFromDatabase() throws SQLException {
         LinkedList<ParticipantListModel> partModels = new LinkedList<>();
         ResultSet res = dm.executeQuery("SELECT * FROM tournaments;");
@@ -115,6 +118,10 @@ public class TournamentListModel extends AbstractListModel{
         return partModels;
     }
     
+    /**
+     * Saves the tournaments to the database.
+     * @throws SQLException SQL Exception
+     */
     public void saveToDatabase() throws SQLException {
         for (Tournament t : tournaments) {
             ResultSet res = dm.executeQuery("SELECT * FROM tournaments WHERE name='"
@@ -133,6 +140,11 @@ public class TournamentListModel extends AbstractListModel{
         }   
     }
     
+    /**
+     * Loads a tournament from a file.
+     * @return A list of participants in the tournament loaded
+     * @throws IOException IOException
+     */
     public ArrayList<Participant> loadFromFile() throws IOException {
         JFileChooser chooser = new JFileChooser();
         ArrayList<Participant> participants = new ArrayList<>();

@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- *
+ * An archery tournament
  * @author Matthias
  */
 public class Tournament {

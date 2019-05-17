@@ -4,7 +4,7 @@ package participant;
 import tournamentclass.TournamentClass;
 
 /**
- *
+ * A participant of a tournament.
  * @author Matthias
  */
 public class Participant {
@@ -18,10 +18,14 @@ public class Participant {
         this.tournamentclass = c;
     }
     
+    /**
+     * Adds a certain amount of points to the score.
+     * @param points The amount of point to be added.
+     */
     public void addScore(int points){
         this.score += points;
     }
-
+    
     public String getName() {
         return name;
     }

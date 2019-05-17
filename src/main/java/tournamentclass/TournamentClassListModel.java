@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.swing.AbstractListModel;
 
 /**
- *
+ * ListModel for the list of tournament-classes.
  * @author Matthias
  */
 public class TournamentClassListModel extends AbstractListModel{
@@ -79,6 +79,10 @@ public class TournamentClassListModel extends AbstractListModel{
         return classes.get(i);
     }
     
+    /**
+     * Loads tournament-classes from the database.
+     * @throws SQLException SQL Exception
+     */
     public void loadFromDatabase() throws SQLException {
         ResultSet res = dm.executeQuery("SELECT * FROM tournamentclasses");
         boolean undefined = false;
@@ -90,6 +94,10 @@ public class TournamentClassListModel extends AbstractListModel{
         this.fireIntervalAdded(this, 0, classes.size()-1);
     }
     
+    /**
+     * Saves the tournament-classes to the database.
+     * @throws SQLException SQL Exception
+     */
     public void saveToDatabase() throws SQLException {
         for(int i = 1; i < classes.size(); i++){
             ResultSet res = dm.executeQuery("SELECT * FROM tournamentclasses "

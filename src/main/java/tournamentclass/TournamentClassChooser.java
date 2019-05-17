@@ -3,7 +3,7 @@ package tournamentclass;
 import java.util.ArrayList;
 
 /**
- *
+ * A form from which a class can be selected from a combobox.
  * @author Matthias
  */
 public class TournamentClassChooser extends javax.swing.JDialog {

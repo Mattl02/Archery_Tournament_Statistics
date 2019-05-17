@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
+ * The DatabaseManager manages the access to the database.
  * @author Matthias
  */
 public class DatabaseManager {
@@ -20,16 +20,33 @@ public class DatabaseManager {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/archery_tournament_statistics", "postgres", "postgres");
     }
     
+    /**
+     * Executes a query.
+     * @param query The query to be executed
+     * @return The ResultSet of the query
+     * @throws SQLException SQL Exception
+     */
     public ResultSet executeQuery(String query) throws SQLException {
         Statement s = conn.createStatement();
         return s.executeQuery(query);
     }
     
+    /**
+     * Executes a query and update.
+     * @param query The query to be executed
+     * @return The ResultSet of the query
+     * @throws SQLException SQL Exception
+     */
     public int executeUpdate(String query) throws SQLException {
         Statement s = conn.createStatement();
         return s.executeUpdate(query);
     }
     
+    /**
+     * 
+     * @return The DatabaseManager Instance
+     * @throws SQLException SQL Exception
+     */
     public static synchronized DatabaseManager getInstance() throws SQLException{
         if(theInstance == null){
             theInstance = new DatabaseManager();

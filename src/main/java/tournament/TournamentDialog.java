@@ -40,6 +40,10 @@ public class TournamentDialog extends javax.swing.JDialog {
         initExistingTournament(t);
     }
     
+    /**
+     * Fills text fields if a tournament is to be edited.
+     * @param t The tournament that is to be edited.
+     */
     public void initExistingTournament(Tournament t) {
         tfName.setText(t.getName());
         tfStart.setText(t.getDate().format(dtf));

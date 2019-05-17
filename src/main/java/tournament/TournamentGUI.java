@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tournament;
 
 import java.io.IOException;
@@ -21,7 +16,7 @@ import tournamentclass.TournamentClassChooser;
 import tournamentclass.TournamentClassGUI;
 
 /**
- *
+ * The main GUI which displays tournaments and their participants.
  * @author Matthias
  */
 public class TournamentGUI extends javax.swing.JFrame {
