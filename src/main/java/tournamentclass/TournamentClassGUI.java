@@ -25,6 +25,8 @@ public class TournamentClassGUI extends javax.swing.JFrame {
     public TournamentClassGUI() {
         initComponents();
         
+        this.setSize(500,300);
+        
         liClasses.setModel(model);
         try {
             model.loadFromDatabase();
@@ -57,7 +59,6 @@ public class TournamentClassGUI extends javax.swing.JFrame {
      */
     public void updateCounts(){
         tfClassCount.setText(model.getSize()+"");
-        tfUnusedClassCount.setText(model.getSize()+"");
     }
 
     /**
@@ -76,8 +77,7 @@ public class TournamentClassGUI extends javax.swing.JFrame {
         lbClassCount = new javax.swing.JLabel();
         tfClassCount = new javax.swing.JTextField();
         lbSpacer = new javax.swing.JLabel();
-        lbUnusedClassCount = new javax.swing.JLabel();
-        tfUnusedClassCount = new javax.swing.JTextField();
+        lbSpacer1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         miAdd = new javax.swing.JMenuItem();
@@ -106,12 +106,7 @@ public class TournamentClassGUI extends javax.swing.JFrame {
         tfClassCount.setEditable(false);
         panelSouth.add(tfClassCount);
         panelSouth.add(lbSpacer);
-
-        lbUnusedClassCount.setText("Unused Classes");
-        panelSouth.add(lbUnusedClassCount);
-
-        tfUnusedClassCount.setEditable(false);
-        panelSouth.add(tfUnusedClassCount);
+        panelSouth.add(lbSpacer1);
 
         getContentPane().add(panelSouth, java.awt.BorderLayout.SOUTH);
 
@@ -202,13 +197,12 @@ public class TournamentClassGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbClassCount;
     private javax.swing.JLabel lbSpacer;
-    private javax.swing.JLabel lbUnusedClassCount;
+    private javax.swing.JLabel lbSpacer1;
     private javax.swing.JList<String> liClasses;
     private javax.swing.JMenuItem miAdd;
     private javax.swing.JMenuItem miRemove;
     private javax.swing.JPanel panelCenter;
     private javax.swing.JPanel panelSouth;
     private javax.swing.JTextField tfClassCount;
-    private javax.swing.JTextField tfUnusedClassCount;
     // End of variables declaration//GEN-END:variables
 }
