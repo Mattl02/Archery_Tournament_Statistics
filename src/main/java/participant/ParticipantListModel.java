@@ -104,6 +104,5 @@ public class ParticipantListModel extends AbstractListModel{
             }
         }
         else System.out.println("alarm");
-
     }
 }

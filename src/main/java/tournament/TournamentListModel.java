@@ -10,7 +10,9 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
+import participant.Participant;
 import participant.ParticipantListModel;
+import tournamentclass.TournamentClass;
 
 /**
  *
@@ -88,7 +90,18 @@ public class TournamentListModel extends AbstractListModel{
         while(res.next()){
             Tournament t = new Tournament(res.getString("name"), res.getDate("date").toLocalDate());
             this.add(t);
-            partModels.add(new ParticipantListModel(t));
+            ParticipantListModel pm = new ParticipantListModel(t);
+            try{
+                ResultSet resP = dm.executeQuery("SELECT * FROM tournament"+
+                        res.getInt("tournamentid"));
+                while(resP.next()){
+                    Participant p = new Participant(resP.getString("name"), new TournamentClass(resP.getString("tournamentClass")));
+                    p.addScore(resP.getInt("score"));
+                    pm.add(p);
+                }
+            }
+            catch(Exception ex) {}
+            partModels.add(pm);
         }
         this.fireIntervalAdded(this, 0, tournaments.size()-1);
         return partModels;
