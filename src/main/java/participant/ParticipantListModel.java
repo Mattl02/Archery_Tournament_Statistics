@@ -1,11 +1,16 @@
 package participant;
 
 import database.DatabaseManager;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.AbstractListModel;
+import javax.swing.JFileChooser;
 import tournament.Tournament;
 import tournamentclass.TournamentClass;
 
@@ -104,5 +109,26 @@ public class ParticipantListModel extends AbstractListModel{
             }
         }
         else System.out.println("alarm");
+    }
+    
+    public void saveToFile() throws IOException{
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+        
+        if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+            File directory = chooser.getSelectedFile();
+            BufferedWriter bw = new BufferedWriter(new FileWriter(new File(directory+
+                    "/"+tournament.getName()+"_"+
+                    tournament.getDate().format(DateTimeFormatter.ofPattern("ddMMyyyy"))+
+                    ".csv")));
+            bw.write(tournament.getName()+","+
+                    tournament.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))+
+                    "\n");
+            for (Participant p : participants) {
+                bw.write(p.getName()+","+p.getTournamentclass()+","+p.getScore()+"\n");
+            }
+            bw.close();
+        }
     }
 }

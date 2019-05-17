@@ -5,6 +5,7 @@
  */
 package tournament;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -83,7 +84,8 @@ public class TournamentGUI extends javax.swing.JFrame {
         panelWestSouth = new javax.swing.JPanel();
         btEditTournamentClasses = new javax.swing.JButton();
         btSaveToDatabase = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        btSaveToFile = new javax.swing.JButton();
+        btLoadToFile = new javax.swing.JButton();
         panelEast = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listParticipants = new javax.swing.JList<>();
@@ -166,7 +168,7 @@ public class TournamentGUI extends javax.swing.JFrame {
 
         panelWest.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        panelWestSouth.setLayout(new java.awt.GridLayout(3, 1));
+        panelWestSouth.setLayout(new java.awt.GridLayout(4, 1));
 
         btEditTournamentClasses.setText("Edit Classes");
         btEditTournamentClasses.addActionListener(new java.awt.event.ActionListener() {
@@ -183,7 +185,22 @@ public class TournamentGUI extends javax.swing.JFrame {
             }
         });
         panelWestSouth.add(btSaveToDatabase);
-        panelWestSouth.add(jLabel2);
+
+        btSaveToFile.setText("Save selected tournament to Directory");
+        btSaveToFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSaveToFileActionPerformed(evt);
+            }
+        });
+        panelWestSouth.add(btSaveToFile);
+
+        btLoadToFile.setText("Load tournament from file");
+        btLoadToFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLoadToFileActionPerformed(evt);
+            }
+        });
+        panelWestSouth.add(btLoadToFile);
 
         panelWest.add(panelWestSouth, java.awt.BorderLayout.SOUTH);
 
@@ -342,6 +359,25 @@ public class TournamentGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_miRemovePointsActionPerformed
 
+    private void btSaveToFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveToFileActionPerformed
+        if(listTournaments.getSelectedIndices().length > 0){
+            if(listTournaments.getSelectedIndices().length == 1){
+                try {
+                    participantModels.get(listTournaments.getSelectedIndex()).saveToFile();
+                } catch (IOException ex) {
+                    Logger.getLogger(TournamentGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Please select only one tournament.");
+            }
+        }
+    }//GEN-LAST:event_btSaveToFileActionPerformed
+
+    private void btLoadToFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoadToFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btLoadToFileActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -379,8 +415,9 @@ public class TournamentGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEditTournamentClasses;
+    private javax.swing.JButton btLoadToFile;
     private javax.swing.JButton btSaveToDatabase;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btSaveToFile;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;

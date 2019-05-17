@@ -151,7 +151,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="1"/>
-            <Property name="rows" type="int" value="3"/>
+            <Property name="rows" type="int" value="4"/>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JButton" name="btEditTournamentClasses">
@@ -170,7 +170,21 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSaveToDatabaseActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JButton" name="btSaveToFile">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Save selected tournament to Directory"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSaveToFileActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btLoadToFile">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Load tournament from file"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btLoadToFileActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
