@@ -22,6 +22,7 @@ public class DatabaseManager {
         if(s != null) {
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+s, "postgres", "postgres");
         }
+        else System.exit(0);
 //        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/archery_tournament_statistics", "postgres", "postgres");
     }
     
