@@ -86,8 +86,9 @@ public class TournamentListModel extends AbstractListModel{
         LinkedList<ParticipantListModel> partModels = new LinkedList<>();
         ResultSet res = dm.executeQuery("SELECT * FROM tournaments;");
         while(res.next()){
-            this.add(new Tournament(res.getString("name"), res.getDate("date").toLocalDate()));
-            partModels.add(new ParticipantListModel());
+            Tournament t = new Tournament(res.getString("name"), res.getDate("date").toLocalDate());
+            this.add(t);
+            partModels.add(new ParticipantListModel(t));
         }
         this.fireIntervalAdded(this, 0, tournaments.size()-1);
         return partModels;

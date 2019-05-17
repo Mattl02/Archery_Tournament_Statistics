@@ -210,7 +210,7 @@ public class TournamentGUI extends javax.swing.JFrame {
         dialog.setVisible(true);
         if(dialog.isOk()){
             tlm.add(dialog.getTournament());
-            participantModels.add(new ParticipantListModel());
+            participantModels.add(new ParticipantListModel(dialog.getTournament()));
         }
     }//GEN-LAST:event_miAddTournamentActionPerformed
 
@@ -258,6 +258,7 @@ public class TournamentGUI extends javax.swing.JFrame {
             if(dialog.isOk()){
                 tlm.remove(idx);
                 tlm.add(idx, dialog.getTournament());
+                participantModels.get(idx).setTournament(dialog.getTournament());
             }
         }
     }//GEN-LAST:event_miEditTournamentActionPerformed
@@ -266,6 +267,9 @@ public class TournamentGUI extends javax.swing.JFrame {
         try {
             tlm.saveToDatabase();
             tcGUI.saveClassesToDatabase();
+            for (ParticipantListModel participantModel : participantModels) {
+                participantModel.saveToDatabase();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(TournamentGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
