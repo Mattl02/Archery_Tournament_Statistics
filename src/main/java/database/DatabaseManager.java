@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  * The DatabaseManager manages the access to the database.
@@ -17,7 +18,11 @@ public class DatabaseManager {
     private Connection conn;
 
     public DatabaseManager() throws SQLException {
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/archery_tournament_statistics", "postgres", "postgres");
+        String s = JOptionPane.showInputDialog(null, "Please enter the name of the database:");
+        if(s != null) {
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+s, "postgres", "postgres");
+        }
+//        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/archery_tournament_statistics", "postgres", "postgres");
     }
     
     /**

@@ -21,7 +21,6 @@ public class TournamentClassListModel extends AbstractListModel{
             dm = DatabaseManager.getInstance();
         }
         catch(SQLException se) {
-            //classes.add(new TournamentClass("undefined"));
             se.printStackTrace();
         }
     }
